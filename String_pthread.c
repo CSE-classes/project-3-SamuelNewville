@@ -80,6 +80,7 @@ void *sub_string(void *threadid) 	/*each process searches in the string with the
 
 	int i, j, k;
 
+	// only look at process's designated portion
 	for (i = start; i <= end && i <= (n1-n2); i++){   
 		int count=0;
 
@@ -93,6 +94,8 @@ void *sub_string(void *threadid) 	/*each process searches in the string with the
 				local_total++;		/*find a substring in this step*/                          
 		}
 	}
+	
+	// mutex lock
 	pthread_mutex_lock(&total_lock);
 	total += local_total;
 	pthread_mutex_unlock(&total_lock);
